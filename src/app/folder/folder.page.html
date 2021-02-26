@@ -3,19 +3,24 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>Search WiFi</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- <ion-spinner name="crescent" duration="3000"></ion-spinner> -->
+  <ion-button  (click)="scanNetworks()" expand="block" fill="clear" shape="round" color="primary">
+    Scan Networks...
+  </ion-button>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item *ngFor="let data of wifi">
+      <ion-label>
+        <h3>SSID: {{ data.SSID }}</h3>
+        <h3>BSSID: {{ data.BSSID }}</h3>
+        <p>Frequency: {{ data.frequency }}</p>
+        <p>Potency: {{ data.level }}dBm</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
