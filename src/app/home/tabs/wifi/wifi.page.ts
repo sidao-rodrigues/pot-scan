@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-//import { WifiWizard2} from '@ionic-native/wifi-wizard-2/ngx';
+
 declare var WifiWizard2: any;
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
+  selector: 'app-wifi',
+  templateUrl: './wifi.page.html',
+  styleUrls: ['./wifi.page.scss'],
 })
-export class FolderPage implements OnInit {
-  public folder: string;
+export class WifiPage implements OnInit {
+
   public wifi = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private loadingController: LoadingController) { }
+  constructor(
+    private loadingController: LoadingController
+  ) { }
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
-  async scanNetworks(event){
+  async scanNetworks(){
     let loading = await this.loadingController.create({
       message: "scanning..."
     });
@@ -43,7 +43,7 @@ export class FolderPage implements OnInit {
 
   }
   /*
-  DATA SCAN
+  DATA SCAN WIFI
     BSSID: "90:f6:52:ce:de:0c"
     SSID: "f'(x) = 9x^3+5x^2+96 = ?"
     capabilities: "[WPA2-PSK-CCMP][RSN-PSK-CCMP][WPA-PSK-CCMP][ESS][WPS][WFA-HT]"

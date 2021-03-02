@@ -3,12 +3,27 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Search WiFi</ion-title>
+    <ion-title>Search {{ currentTab }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-spinner name="crescent" duration="3000"></ion-spinner> -->
+  <ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="wifi">
+        <ion-icon name="wifi"></ion-icon>
+        <ion-label>WiFi</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="bluetooth">
+        <ion-icon name="bluetooth"></ion-icon>
+        <ion-label>Bluetooth</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+
+  <!-- <ion-spinner name="crescent" duration="3000"></ion-spinner>
   <ion-button  (click)="scanNetworks()" expand="block" fill="clear" shape="round" color="primary">
     Scan Networks...
   </ion-button>
@@ -22,5 +37,5 @@
         <p>Potency: {{ data.level }}dBm</p>
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { WifiPageRoutingModule } from './wifi-routing.module';
 
-import { FolderPage } from './folder.page';
+import { WifiPage } from './wifi.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    WifiPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [WifiPage]
 })
-export class FolderPageModule {}
+export class WifiPageModule {}

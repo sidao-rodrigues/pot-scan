@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="scanBle()" expand="block" fill="clear" shape="round" color="primary">
+    Scan...
+  </ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let data of devices">
+      <h3>Device: {{ data.name || 'unnamed' }}</h3>
+      <h3>ID: {{ data.id }}</h3>
+      <p>Frequency: {{ data.frequency }}Mhz</p>
+      <p>Potency: {{ data.rssi }}dBm</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
