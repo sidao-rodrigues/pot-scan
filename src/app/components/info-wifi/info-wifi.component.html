@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Info rede WiFi</ion-title>
+    <ion-buttons slot="start">
+      <ion-button expand="block" fill="clear">
+        <ion-icon name="information-circle-sharp" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="primary">
+        Close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider class="item-divider">
+    <!-- <ion-label color="dark">Info</ion-label> -->
+  </ion-item-divider>
+  <ion-avatar class="ion-avatar">
+    <img src="../../../assets/img/wifi_tethering_black_48dp.png" />
+  </ion-avatar>
+  <ion-item-divider>
+  </ion-item-divider>
+  <ion-list>
+    <ion-item lines="inset">
+      <ion-label position="floating">SSID/Name</ion-label>
+      <ion-input type="text" readonly [value]="rede.SSID"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label position="floating">BSSID/MAC</ion-label>
+      <ion-input type="text" readonly [value]="rede.BSSID"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label >Frequency: </ion-label>
+      <ion-input type="text" readonly [value]="rede.frequency+' MHz'"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label >Channel: </ion-label>
+      <ion-input type="text" readonly [value]="rede.channelWidth"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label>Level: </ion-label>
+      <ion-input type="text" readonly [value]="rede.level+' dBm'"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label position="stacked">Security</ion-label>
+      <ion-textarea rows="2" readonly [value]="rede.capabilities"></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<!-- BSSID: "90:f6:52:ce:de:0c"
+SSID: "f'(x) = 9x^3+5x^2+96 = ?"
+capabilities: "[WPA2-PSK-CCMP][RSN-PSK-CCMP][WPA-PSK-CCMP][ESS][WPS][WFA-HT]"
+centerFreq0: 2422
+centerFreq1: 0
+channelWidth: 1
+frequency: 2412
+level: -36
+timestamp: 168237457334 -->

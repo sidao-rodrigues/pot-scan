@@ -8,6 +8,9 @@
   <ion-button (click)="scanBle()" expand="block" fill="clear" shape="round" color="primary">
     Scan...
   </ion-button>
+  <ion-button (click)="stop()" expand="block" fill="clear" shape="round" color="primary">
+    stop
+  </ion-button>
 
   <ion-list>
     <ion-item *ngFor="let data of devices">

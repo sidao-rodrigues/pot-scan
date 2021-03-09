@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./home/home.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.FolderPageModule)
   }
 ];
 

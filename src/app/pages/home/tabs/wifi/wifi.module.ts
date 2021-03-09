@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { WifiPageRoutingModule } from './wifi-routing.module';
 
 import { WifiPage } from './wifi.page';
+import { InfoWifiComponent } from 'src/app/components/info-wifi/info-wifi.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,10 @@ import { WifiPage } from './wifi.page';
     IonicModule,
     WifiPageRoutingModule
   ],
-  declarations: [WifiPage]
+  declarations: [
+    WifiPage,
+    InfoWifiComponent
+  ],
+  entryComponents: [InfoWifiComponent]
 })
 export class WifiPageModule {}

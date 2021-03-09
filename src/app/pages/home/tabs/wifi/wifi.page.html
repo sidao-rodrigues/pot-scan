@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-button (click)="scanNetworks()" expand="block" shape="round" color="primary">
+    Scan...
+  </ion-button> -->
+  <ion-item-divider lines="inset">
+    <ion-label color="dark">List WiFi</ion-label>
+  </ion-item-divider>
+  <ion-list>
+    <ion-item *ngFor="let data of wifiService.wifis" lines="full" (click)="openInfo(data)">
+      <ion-icon name="wifi" slot="start" size="large"></ion-icon>
+      <!-- <ion-icon name="arrow-left" slot="end" size="small"></ion-icon> -->
+      <ion-label>
+        <h2>{{ data.SSID }}</h2>
+        <h3>MAC: {{ data.BSSID }}</h3>
+        <h3>Level: {{ data.level }}dBm | <span class="frequency">Frequency: {{ (data.frequency / 1000).toFixed(1) }}Ghz</span></h3>
+        <!-- <p>{{ data.capabilities }}</p> -->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
