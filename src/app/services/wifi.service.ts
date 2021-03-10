@@ -17,8 +17,8 @@ export class WifiService {
       .then(() =>{
         WifiWizard2.getScanResults()
           .then((res) => {
-              console.log(res);
-              this.wifis = res;
+              //this.wifis = res.sort((a,b) => { return -a.level+b.level });
+              this.wifis = res.sort((a, b) => (a.level > b.level) ? -1 : 1);
             })
             .catch((e) => {
               console.log(e);
@@ -43,5 +43,15 @@ export class WifiService {
         this.wifiIsEnabled = enabled;
       })
       .catch((e) => console.log(e));
+  }
+
+  calculatorDistancyDefaultValues(rede){
+    let d0 = 1, gr = 0, gt = 0, beta = 5, pt = 20, pr = rede.level;
+
+    let pl = 32.44 + (20 * Math.log10(d0/1000)) + (20 * Math.log10(rede.frequency));
+    let pr0 = pt + gt + gr - pl;
+    let logD = ((pr0 - pr)/(10 * beta)) + Math.log10(d0);
+    let distancy = Math.pow(10, logD);
+    return distancy;
   }
 }

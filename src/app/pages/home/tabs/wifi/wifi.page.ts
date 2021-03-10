@@ -59,7 +59,7 @@ export class WifiPage implements OnInit {
   async openInfo(wifi){
     const modal = await this.modalCtrl.create({
       component: InfoWifiComponent,
-      componentProps: {rede: wifi}
+      componentProps: {rede: wifi, service: this.wifiService}
     });
 
     await modal.present();

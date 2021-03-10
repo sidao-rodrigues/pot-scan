@@ -1,14 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title class="ion-text-center">Info rede WiFi</ion-title>
-    <ion-buttons slot="start">
+  <ion-toolbar color="primary">
+    <ion-title>Info</ion-title>
+    <!-- class="ion-text-center" -->
+    <!-- <ion-buttons slot="start">
       <ion-button expand="block" fill="clear">
-        <ion-icon name="information-circle-sharp" size="large"></ion-icon>
+        <ion-icon name="information-circle-sharp" size="large" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()" color="light">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()" color="primary">
-        Close
+      <ion-button expand="block" fill="clear">
+        <ion-label>auto?</ion-label>
+        <ion-toggle color="success" #realTime (ionChange)="realTimeScan($event)"></ion-toggle>
+      </ion-button>
+      <ion-button expand="block" fill="clear">
+        <ion-icon name="ellipsis-vertical-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -19,7 +29,7 @@
     <!-- <ion-label color="dark">Info</ion-label> -->
   </ion-item-divider>
   <ion-avatar class="ion-avatar">
-    <img src="../../../assets/img/wifi_tethering_black_48dp.png" />
+    <img src="../../../assets/img/wifi_tethering_black_48dp.png"/>
   </ion-avatar>
   <ion-item-divider>
   </ion-item-divider>
@@ -32,6 +42,11 @@
     <ion-item lines="inset">
       <ion-label position="floating">BSSID/MAC</ion-label>
       <ion-input type="text" readonly [value]="rede.BSSID"></ion-input>
+    </ion-item>
+
+    <ion-item lines="inset">
+      <ion-label position="stacked">Security</ion-label>
+      <ion-textarea rows="2" readonly [value]="rede.capabilities"></ion-textarea>
     </ion-item>
 
     <ion-item lines="inset">
@@ -50,8 +65,8 @@
     </ion-item>
 
     <ion-item lines="inset">
-      <ion-label position="stacked">Security</ion-label>
-      <ion-textarea rows="2" readonly [value]="rede.capabilities"></ion-textarea>
+      <ion-label>Approximate Distance: </ion-label>
+      <ion-input type="text" readonly [value]="distancy != undefined ? distancy.toFixed(2)+' m' : '? m'"></ion-input>
     </ion-item>
 
   </ion-list>

@@ -1,16 +1,16 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button color="dark"></ion-menu-button>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title>Search {{ currentTab }}</ion-title>
     <ion-buttons slot="end">
       <ion-buttons>
-        <ion-button expand="block" fill="clear"  (click)="scan()">
-          <ion-icon slot="icon-only" name="sync"></ion-icon>
+        <ion-button expand="block" fill="clear" (click)="scan()">
+          <ion-icon slot="icon-only" name="sync" color="light"></ion-icon>
         </ion-button>
         <ion-button expand="block" fill="clear" (click)="changeEnabledWifiOptionsYN(!wifiService.wifiIsEnabled)">
-          <ion-icon slot="icon-only" name="wifi"></ion-icon>
+          <ion-icon slot="icon-only" name="wifi" color="light"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-buttons>
