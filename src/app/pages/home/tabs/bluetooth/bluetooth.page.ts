@@ -66,7 +66,8 @@ export class BluetoothPage implements OnInit {
           console.log('bluetooth desativado');
         });
         */
-      /*this.bluetoothle.initialize({ request: true, statusReceiver: false }).subscribe(ble => {
+      //  { request: true, statusReceiver: false }
+      this.bluetoothle.initialize().subscribe(ble => {
         //console.log('ble', ble.status)
 
         let params = {
@@ -88,7 +89,7 @@ export class BluetoothPage implements OnInit {
               console.log(device);
             });
         }
-      });*/
+      });
       /*this.ble.scan([], 15).subscribe(device => {
         console.log(JSON.stringify(device));
         this.onDeviceDiscovered(device);

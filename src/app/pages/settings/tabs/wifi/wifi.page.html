@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>wifi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item lines="full">
+      <ion-icon name="construct-sharp" slot="start" size="large"></ion-icon>
+      <ion-label text-wrap>
+        <h2>Profiles</h2>
+        <p>List of profiles for use in equations of Friis and trilateration technique WiFi</p>
+      </ion-label>
+      <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+    </ion-item>
+
+    <!-- <ion-card-content> -->
+      <ion-radio-group value="2.4">
+        <ion-item>
+          <ion-icon name="build-sharp" slot="start" size="small"></ion-icon>
+          <ion-label>default 2,4GHz</ion-label>
+          <ion-radio slot="end" value="2.4"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="build-sharp" slot="start" size="small"></ion-icon>
+          <ion-label>default 5,0GHz</ion-label>
+          <ion-radio slot="end" value="5.0"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    <!-- </ion-card-content> -->
+
+  </ion-card>
+
+  <!-- <ion-card>
+    <ion-radio-group value="2.4">
+      <ion-item>
+        <ion-icon name="build-sharp" slot="start" size="large"></ion-icon>
+        <ion-label>default 2,4GHz</ion-label>
+        <ion-radio slot="end" value="2.4"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="build-sharp" slot="start" size="large"></ion-icon>
+        <ion-label>default 5,0GHz</ion-label>
+        <ion-radio slot="end" value="5.0"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-card>-->
+
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Info</ion-card-subtitle> -->
+      <ion-card-title>Info</ion-card-title>
+    </ion-card-header>
+    <div class="img-equation">
+      <img src="./assets/img/equation_v1.svg" alt="Equation friis">
+    </div>
+    <ion-card-content class="ion-no-padding">
+      <ion-item lines="inset">
+        <ion-label position="floating">Transmit Power (Pt):</ion-label>
+        <ion-input type="text" readonly value="20 dBm"></ion-input>
+      </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="floating">Transmit Gain (Gt):</ion-label>
+        <ion-input type="text" readonly value="0 dBi"></ion-input>
+      </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="floating">Receive Gain (Gr):</ion-label>
+        <ion-input type="text" readonly value="20 dBi"></ion-input>
+      </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="floating">Reference Distance (d0): </ion-label>
+        <ion-input type="text" readonly value="1 m"></ion-input>
+      </ion-item>
+      <ion-item lines="inset">
+        <ion-label position="floating">Beta (&beta;):
+        </ion-label>
+        <ion-input type="text" readonly value="5"></ion-input>
+        <ion-icon name="information-circle-sharp" slot="end" size="small" (click)="infoBeta = !infoBeta"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" *ngIf="infoBeta">
+        <ion-label>
+          <!-- Range &beta; -->
+          <p>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="9" class="ion-text-center">
+                <ion-text color="dark">
+                  <h2>Ambiente</h2>
+                </ion-text>
+              </ion-col>
+              <ion-col size="3" class="v-border">
+                <ion-text color="dark">
+                  <h2>&beta;</h2>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9" class="h-border">Espaço Livre</ion-col>
+              <ion-col size="3" class="v-border  h-border">2</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9">Rádio-celular em área urbana</ion-col>
+              <ion-col size="3" class="v-border">2,7 a 3,5</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9">Rádio-celular urbano sombreado</ion-col>
+              <ion-col size="3" class="v-border">3 a 5</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9">Na linha de visão do prédio</ion-col>
+              <ion-col size="3" class="v-border">1,6 a 1,8</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9">Obstruído no prédio</ion-col>
+              <ion-col size="3" class="v-border">4 a 6</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="9">Obstruído em fábricas</ion-col>
+              <ion-col size="3" class="v-border">2 a 3</ion-col>
+            </ion-row>
+          </ion-grid>
+          </p>
+        </ion-label>
+        <!-- <ion-input type="text" readonly value="5"></ion-input> -->
+        <!-- <ion-icon name="information-circle-sharp" slot="start"></ion-icon> -->
+
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

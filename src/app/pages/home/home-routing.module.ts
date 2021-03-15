@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/wifi',
+        redirectTo: '/home/wifi',
         pathMatch: 'full'
       },
       {

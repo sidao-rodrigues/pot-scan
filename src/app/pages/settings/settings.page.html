@@ -1,12 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
       <ion-title>Settings</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="wifi">
+        <ion-icon name="wifi"></ion-icon>
+        <ion-label>WiFi</ion-label>
+      </ion-tab-button>
 
+      <ion-tab-button tab="bluetooth">
+        <ion-icon name="bluetooth"></ion-icon>
+        <ion-label>Bluetooth</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
