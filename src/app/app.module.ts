@@ -12,6 +12,8 @@ import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
+    StatusBar,
+    SplashScreen,
     BLE,
     BluetoothLE,
     BluetoothSerial,

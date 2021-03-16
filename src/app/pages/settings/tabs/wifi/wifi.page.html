@@ -5,34 +5,61 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-fab vertical="top" horizontal="end" class="ion-padding">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="start">
+      <ion-fab-button color="secondary">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="success" (click)="addProfile()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+
+  </ion-fab>
+
   <ion-card>
     <ion-item lines="full">
-      <ion-icon name="construct-sharp" slot="start" size="large"></ion-icon>
+      <!-- <ion-icon name="construct-sharp" slot="end" size="large"></ion-icon> -->
+      <ion-icon slot="end" size="large"></ion-icon>
       <ion-label text-wrap>
         <h2>Profiles</h2>
         <p>List of profiles for use in equations of Friis and trilateration technique WiFi</p>
       </ion-label>
       <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+
     </ion-item>
 
     <!-- <ion-card-content> -->
-      <ion-radio-group value="2.4">
-        <ion-item>
+      <ion-radio-group value="" (ionChange)="radioGroupChange($event)" #radio>
+        <ion-item *ngFor="let p of profiles;">
           <ion-icon name="build-sharp" slot="start" size="small"></ion-icon>
-          <ion-label>default 2,4GHz</ion-label>
-          <ion-radio slot="end" value="2.4"></ion-radio>
+          <ion-label>{{ p.nome }}</ion-label>
+          <ion-radio slot="end" [value]="p._id"></ion-radio>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-icon name="build-sharp" slot="start" size="small"></ion-icon>
           <ion-label>default 5,0GHz</ion-label>
           <ion-radio slot="end" value="5.0"></ion-radio>
-        </ion-item>
+        </ion-item> -->
       </ion-radio-group>
     <!-- </ion-card-content> -->
+      <!-- <ion-card-content class="ion-padding-top">
 
+      </ion-card-content> -->
   </ion-card>
-
+  <!-- <ion-label>{{ radio.value }}</ion-label> -->
   <!-- <ion-card>
     <ion-radio-group value="2.4">
       <ion-item>
@@ -49,7 +76,7 @@
     </ion-radio-group>
   </ion-card>-->
 
-  <ion-card>
+  <ion-card *ngIf="radio.value != ''">
     <ion-card-header>
       <!-- <ion-card-subtitle>Info</ion-card-subtitle> -->
       <ion-card-title>Info</ion-card-title>
@@ -58,28 +85,47 @@
       <img src="./assets/img/equation_v1.svg" alt="Equation friis">
     </div>
     <ion-card-content class="ion-no-padding">
-      <ion-item lines="inset">
-        <ion-label position="floating">Transmit Power (Pt):</ion-label>
-        <ion-input type="text" readonly value="20 dBm"></ion-input>
-      </ion-item>
-      <ion-item lines="inset">
-        <ion-label position="floating">Transmit Gain (Gt):</ion-label>
-        <ion-input type="text" readonly value="0 dBi"></ion-input>
-      </ion-item>
-      <ion-item lines="inset">
-        <ion-label position="floating">Receive Gain (Gr):</ion-label>
-        <ion-input type="text" readonly value="20 dBi"></ion-input>
-      </ion-item>
-      <ion-item lines="inset">
-        <ion-label position="floating">Reference Distance (d0): </ion-label>
-        <ion-input type="text" readonly value="1 m"></ion-input>
-      </ion-item>
-      <ion-item lines="inset">
-        <ion-label position="floating">Beta (&beta;):
-        </ion-label>
-        <ion-input type="text" readonly value="5"></ion-input>
-        <ion-icon name="information-circle-sharp" slot="end" size="small" (click)="infoBeta = !infoBeta"></ion-icon>
-      </ion-item>
+      <form [formGroup]="authForm">
+        <ion-item lines="inset">
+          <ion-label position="floating">Name:</ion-label>
+          <ion-input type="text" formControlName="nome" [disabled]="!fieldsAreEnabled"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="nome.dirty && nome.hasError('required')">required</ion-note>
+          <ion-note slot="end" color="danger" *ngIf="nome.dirty && nome.hasError('minlength')">min 3 character</ion-note>
+          <ion-note slot="end" color="danger" *ngIf="nome.dirty && nome.hasError('maxlength')">max 20 character</ion-note>
+          <!-- dBm -->
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Transmit Power (Pt)[dBm]:</ion-label>
+          <ion-input type="number" formControlName="pt" [disabled]="!fieldsAreEnabled"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="pt.dirty && pt.hasError('required')">required</ion-note>
+          <!-- dBm -->
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Transmit Gain (Gt)[dBi]:</ion-label>
+          <ion-input type="number" formControlName="gt" [disabled]="!fieldsAreEnabled"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="gt.dirty && gt.hasError('required')">required</ion-note>
+          <!-- dBi -->
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Receive Gain (Gr)[dBi]:</ion-label>
+          <ion-input type="number" formControlName="gr" [disabled]="!fieldsAreEnabled"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="gr.dirty && gr.hasError('required')">required</ion-note>
+          <!-- dBi -->
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Reference Distance (d0)[m]: </ion-label>
+          <ion-input type="number" formControlName="d0" [disabled]="!fieldsAreEnabled"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="d0.dirty && d0.hasError('required')">required</ion-note>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">
+            Beta (&beta;):
+          </ion-label>
+          <ion-input type="number" formControlName="beta" readonly="{{!fieldsAreEnabled}}"></ion-input>
+          <ion-note slot="end" color="danger" *ngIf="beta.dirty && beta.hasError('required')">required</ion-note>
+          <ion-icon name="information-circle-sharp" slot="end" size="small" (click)="infoBeta = !infoBeta" class="ion-padding-top"></ion-icon>
+        </ion-item>
+      </form>
       <ion-item lines="none" *ngIf="infoBeta">
         <ion-label>
           <!-- Range &beta; -->
@@ -128,6 +174,9 @@
         <!-- <ion-icon name="information-circle-sharp" slot="start"></ion-icon> -->
 
       </ion-item>
+      <ion-button *ngIf="fieldsAreEnabled" expand="full" fill="solid" shape="round" color="primary" [disabled]="!authForm.valid">
+        Save
+      </ion-button>
     </ion-card-content>
   </ion-card>
 
