@@ -12,6 +12,7 @@ export class WifiService {
 
   public wifis: any = [];
   public wifiIsEnabled: boolean = false;
+  public buttons = false;
 
   constructor(
     private sqliteService: SqliteService
@@ -50,8 +51,8 @@ export class WifiService {
       .catch((e) => console.log(e));
   }
 
-  calculatorDistancyDefaultValues(rede){
-    let d0 = 1, gr = 0, gt = 0, beta = 5, pt = 20, pr = rede.level;
+  calculatorDistancyDefaultValues(rede, beta){
+    let d0 = 1, gr = 0, gt = 0, pt = 20, pr = rede.level;
 
     let pl = 32.44 + (20 * Math.log10(d0/1000)) + (20 * Math.log10(rede.frequency));
     let pr0 = pt + gt + gr - pl;

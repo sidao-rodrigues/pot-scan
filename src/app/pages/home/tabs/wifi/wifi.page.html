@@ -8,18 +8,97 @@
   <!-- <ion-button (click)="scanNetworks()" expand="block" shape="round" color="primary">
     Scan...
   </ion-button> -->
+  <ion-card>
+    <ion-card-header *ngIf="!buttons">
+      <ion-item>
+        <ion-card-subtitle>Info search</ion-card-subtitle>
+        <ion-toggle slot="end" color="primary" [(ngModel)]="toggle"></ion-toggle>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="!buttons">
+      <ion-item lines="full">
+        <ion-label>Beta(A): </ion-label>
+        <ion-input type="number" [(ngModel)]="beta.b1"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>MAC(A): </ion-label>
+        <ion-input type="text" [(ngModel)]="mac.m1"></ion-input>
+      </ion-item>
+      <!-- <ion-item-divider></ion-item-divider> -->
+
+      <ion-item lines="full">
+        <ion-label>Beta(B): </ion-label>
+        <ion-input type="number" [(ngModel)]="beta.b2"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>MAC(B): </ion-label>
+        <ion-input type="text" [(ngModel)]="mac.m2"></ion-input>
+      </ion-item>
+      <!-- <ion-item-divider></ion-item-divider> -->
+
+      <ion-item lines="full">
+        <ion-label>Beta(C): </ion-label>
+        <ion-input type="number" [(ngModel)]="beta.b3"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>MAC(C): </ion-label>
+        <ion-input type="text" [(ngModel)]="mac.m3"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label>Coordenada P(Xb): </ion-label>
+        <ion-input type="number" [(ngModel)]="coordenadas.pxb"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Coordenada Q(Xc): </ion-label>
+        <ion-input type="number" [(ngModel)]="coordenadas.qxc"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Coordenada R(Yc): </ion-label>
+        <ion-input type="number" [(ngModel)]="coordenadas.ryc"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Posição/Teste: </ion-label>
+        <ion-select value="1" placeholder="Posição" [(ngModel)]="posicao">
+          <ion-select-option value="1">1º</ion-select-option>
+          <ion-select-option value="2">2º</ion-select-option>
+          <ion-select-option value="3">3º</ion-select-option>
+          <ion-select-option value="4">4º</ion-select-option>
+          <ion-select-option value="5">5º</ion-select-option>
+          <ion-select-option value="6">6º</ion-select-option>
+          <ion-select-option value="7">7º</ion-select-option>
+          <ion-select-option value="8">8º</ion-select-option>
+          <ion-select-option value="9">9º</ion-select-option>
+          <ion-select-option value="10">10º</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Repetições por teste: </ion-label>
+        <ion-input type="number" [(ngModel)]="repeticoes"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Tempo entre repetições (s) </ion-label>
+        <ion-input type="number" [(ngModel)]="timeTest"></ion-input>
+      </ion-item>
+      <ion-button (click)="initTest()" expand="block" shape="round" color="primary" [disabled]="buttons">
+        Iniciar Teste
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
   <ion-item-divider lines="inset">
     <ion-label color="dark">List WiFi</ion-label>
   </ion-item-divider>
   <ion-list>
     <ion-item *ngFor="let data of wifiService.wifis" lines="full" (click)="openInfo(data)">
       <!-- <ion-icon name="information-circle-sharp" slot="end" size="large"></ion-icon> -->
-      <ion-icon name="wifi" slot="start" size="large" class="icon-wifi"></ion-icon>
+      <ion-icon name="wifi" slot="start" size="large" class="icon-wifi" *ngIf="verifyByMac(data).pass"></ion-icon>
       <!-- <ion-icon name="arrow-left" slot="end" size="small"></ion-icon> -->
-      <ion-label>
+      <ion-label *ngIf="verifyByMac(data).pass">
         <h2>{{ data.SSID }}</h2>
         <h3>MAC: {{ data.BSSID }}</h3>
         <h3>Level: {{ data.level }}dBm | <span class="frequency">Frequency: {{ (data.frequency / 1000).toFixed(1) }}Ghz</span></h3>
+        <h3>Distancy: {{ verifiBySlot(data) != undefined ? verifiBySlot(data).toFixed(2) : '~'+calculator(data, 5).toFixed(2) }} m </h3>
         <!-- <p>{{ data.capabilities }}</p> -->
       </ion-label>
     </ion-item>

@@ -14,6 +14,7 @@ export class InfoWifiComponent implements OnInit, OnDestroy {
   @Input() rede: any;
   @Input() service: WifiService;
 
+  public beta: any = 5;
   public distancy: any = 0;
   private continueScan: boolean = false;
   private intervalId: any;
@@ -25,7 +26,7 @@ export class InfoWifiComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(){
-    this.distancy = this.service.calculatorDistancyDefaultValues(this.rede);
+    this.distancy = this.service.calculatorDistancyDefaultValues(this.rede, this.beta);
   }
 
   ngOnDestroy(){
@@ -53,7 +54,7 @@ export class InfoWifiComponent implements OnInit, OnDestroy {
         .then(() => {
           console.log('terminado');
           if(this.rede.level != '?') {
-            this.distancy = this.service.calculatorDistancyDefaultValues(this.rede);
+            this.distancy = this.service.calculatorDistancyDefaultValues(this.rede, this.beta);
           }
         });
       }, 6500);

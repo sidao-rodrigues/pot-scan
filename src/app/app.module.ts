@@ -14,6 +14,8 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
+    NativeAudio,
+    File,
     StatusBar,
     SplashScreen,
     BLE,

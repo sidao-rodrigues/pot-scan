@@ -6,7 +6,7 @@
     <ion-title>Search {{ currentTab }}</ion-title>
     <ion-buttons slot="end">
       <ion-buttons>
-        <ion-button expand="block" fill="clear" (click)="scan()">
+        <ion-button expand="block" fill="clear" (click)="scan()" [disabled]="wifiService.buttons">
           <ion-icon slot="icon-only" name="sync" color="light"></ion-icon>
         </ion-button>
         <ion-button expand="block" fill="clear" (click)="changeEnabledWifiOptionsYN(!wifiService.wifiIsEnabled)">

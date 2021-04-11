@@ -31,7 +31,8 @@ export class FolderPage implements OnInit {
         this.androidPermissions.PERMISSION.BLUETOOTH,
         this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
         this.androidPermissions.PERMISSION.ACCESS_MEDIA_LOCATION,
-        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION
+        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+        this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
       ];
       this.platform.ready()
         .then(() => {
@@ -56,16 +57,16 @@ export class FolderPage implements OnInit {
      }
 
   ngOnInit() {
-    this.wifiIsEnabled();
+    //this.wifiIsEnabled();
   }
 
-  wifiIsEnabled(){
+  /*wifiIsEnabled(){
     this.platform.ready()
       .then(() => {
-        this.wifiService.wifiVerifyIsEnabled();
+
       })
       .catch((e) => console.log(e));
-  }
+  }*/
 
   setCurrentTab() {
     this.currentTab = this.tabs.getSelected() == 'wifi' ? 'WiFi' : 'Bluetooth';
