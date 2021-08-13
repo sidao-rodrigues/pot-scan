@@ -23,6 +23,7 @@ export class WifiPage implements OnInit {
   public distancies: any = {d1: 0, d2: 0, d3: 0};
   public coordenadas: any = {pxb: 0, qxc: 0, ryc: 0};
   public posicao: any = 1;
+  public periodo: any = "";
   public toggle = true;
   public buttons = false;
   public count = 1;
@@ -92,7 +93,7 @@ export class WifiPage implements OnInit {
   }
 
   setData(){
-    this.allData += `${this.posicao}, ${this.count}, ${this.potencies.p1 == "" ? "undefined" : this.potencies.p1}, ${this.potencies.p2 == "" ? "undefined" : this.potencies.p2}, ${this.potencies.p3 == "" ? "undefined" : this.potencies.p3}, ${this.distancies.d1 == "" ? "undefined" : this.distancies.d1}, ${this.distancies.d2 == "" ? "undefined" : this.distancies.d2}, ${this.distancies.d3 == "" ? "undefined" : this.distancies.d3}, ${this.calculatorX()}, ${this.calculatorY()}\n`;
+    this.allData += `${this.posicao},${this.count},${this.potencies.p1 == "" ? "undefined" : this.potencies.p1},${this.potencies.p2 == "" ? "undefined" : this.potencies.p2},${this.potencies.p3 == "" ? "undefined" : this.potencies.p3},${this.distancies.d1 == "" ? "undefined" : this.distancies.d1},${this.distancies.d2 == "" ? "undefined" : this.distancies.d2},${this.distancies.d3 == "" ? "undefined" : this.distancies.d3},${this.calculatorX()},${this.calculatorY()},${moment(new Date()).format('YYYY/MM/DD HH:mm:ss')},${this.periodo}\n`;
   }
 
   async openInfo(wifi){
@@ -188,10 +189,10 @@ export class WifiPage implements OnInit {
     this.wifiService.buttons = true;
     this.nameFile = "";
     this.count = 1;
-    this.allData = "posicao, medicao, p_a, p_b, p_c, d_a, d_b, d_c, x, y\n";
+    this.allData = "posicao,medicao,p_a,p_b,p_c,d_a,d_b,d_c,x,y,data,periodo\n";
     await this.playBeep('uniqueId2');
 
-    this.nameFile = `${moment(new Date()).format('YYYY-MM-DD_HH-mm-ss')}_position_${this.posicao}.csv`;
+    this.nameFile = `${moment(new Date()).format('YYYY-MM-DD_HH-mm-ss')}_position_${this.posicao}_periodo_${this.periodo}.csv`;
     //await this.writeData("");
     this.intervalId = setInterval(() => {
       this.scanNetworks();
