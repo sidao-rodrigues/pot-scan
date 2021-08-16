@@ -60,6 +60,10 @@
       </ion-item>
       <ion-item lines="full">
         <ion-label>Posição/Teste: </ion-label>
+        <ion-input type="number" [(ngModel)]="posicao"></ion-input>
+      </ion-item>
+      <!--<ion-item lines="full">
+        <ion-label>Posição/Teste: </ion-label>
         <ion-select value="1" placeholder="Posição" [(ngModel)]="posicao">
           <ion-select-option value="1">1º</ion-select-option>
           <ion-select-option value="2">2º</ion-select-option>
@@ -82,7 +86,7 @@
           <ion-select-option value="19">19º</ion-select-option>
           <ion-select-option value="20">20º</ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item>-->
       <ion-item lines="full">
         <ion-label>Período: </ion-label>
         <ion-select value="MANHA" placeholder="Período" [(ngModel)]="periodo">
