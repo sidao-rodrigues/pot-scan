@@ -5,6 +5,8 @@ import { WifiService } from 'src/app/services/wifi.service';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { File } from '@ionic-native/file/ngx';
 import * as moment from "moment";
+// import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 declare var WifiWizard2: any;
 
@@ -22,8 +24,8 @@ export class WifiPage implements OnInit {
   public mac: any = {m1:"", m2:"", m3:""};
   public distancies: any = {d1: 0, d2: 0, d3: 0};
   public coordenadas: any = {pxb: 0, qxc: 0, ryc: 0};
-  public posicao: any = 1;
-  public periodo: any = "";
+  public posicao: any = "1";
+  public periodo: any = "MANHA";
   public toggle = true;
   public buttons = false;
   public count = 1;
@@ -40,7 +42,9 @@ export class WifiPage implements OnInit {
     private modalCtrl: ModalController,
     private plf: Platform,
     private nativeAudio: NativeAudio,
-    private file: File
+    private file: File,
+    private storage: AngularFireStorage
+    //private storage: AngularFireStorage
   ) { }
 
   ngOnInit() {
@@ -236,16 +240,22 @@ export class WifiPage implements OnInit {
           console.log('erro no cat:', err);
 
           return this.file.createFile(this.file.externalCacheDirectory, this.nameFile, true)
-            .then(FileEntry => this.writeToAccessLogFile(text))
+            .then(FileEntry => {
+              //SAVE FILE IN CACHE
+              this.writeToAccessLogFile(text).then(() => {
+                this.uploadFile(FileEntry, this.nameFile);
+              });
+              //SEND FILE TO FIREBASE
+            })
             .catch(err => console.log('Coul dont create file', err));
       });
     //});
   }
 
-  writeToAccessLogFile(text: string) {
+  async writeToAccessLogFile(text: string) {
     console.log('texto: ', text);
 
-    this.file.writeExistingFile(this.file.externalCacheDirectory, this.nameFile, text)
+    await this.file.writeExistingFile(this.file.externalCacheDirectory, this.nameFile, text)
     .then((data) => {
       console.log('escreveu');
     }).catch((error) => {
@@ -281,6 +291,36 @@ export class WifiPage implements OnInit {
       value = (Math.pow(this.distancies.d1, 2) - Math.pow(this.distancies.d3, 2) + Math.pow(this.coordenadas.qxc, 2) + Math.pow(this.coordenadas.ryc, 2))/(2 * this.coordenadas.ryc) - (this.calculatorX() * (this.coordenadas.qxc/this.coordenadas.ryc));
     }
     return value;
+  }
+
+  //SEND FILE
+  async uploadFile(f: FileEntry, nameFile: string) {
+    const path = f.nativeURL.substr(0, f.nativeURL.lastIndexOf('/') + 1);
+    const type = this.getMimeType(f.name.split('.').pop());
+    const buffer = await this.file.readAsArrayBuffer(path, f.name);
+    const fileBlob = new Blob([buffer], type);
+
+    const randomId = Math.random().toString(36).substring(2, 8);
+
+    const uploadTask = this.storage.upload(
+      `files/${this.periodo}/${nameFile}`, fileBlob //`files/${nameFile}_${randomId}`
+    );
+
+    uploadTask.then(async res => {
+      const toast = await this.loadingController.create({
+        duration: 3000,
+        message: 'File upload finished!'
+      });
+      toast.present();
+    });
+  }
+
+  getMimeType(fileExt) {
+    if (fileExt == 'wav') return { type: 'audio/wav' };
+    else if (fileExt == 'jpg') return { type: 'image/jpg' };
+    else if (fileExt == 'mp4') return { type: 'video/mp4' };
+    else if (fileExt == 'MOV') return { type: 'video/quicktime' };
+    else if (fileExt == 'csv') return { type: 'text/csv' };
   }
 
   /*

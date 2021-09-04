@@ -17,11 +17,24 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFirestoreModule  } from '@angular/fire/firestore';
+
+import { environment } from '../environments/environment';
+// import { AngularFireModule } from "angularfire2";
+// import { AngularFireDatabase } from "angularfire2/database";
+// import { AngularFireStorageModule } from "angularfire2/storage";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireDatabase,
+    AngularFireStorageModule,
+  ],
   providers: [
     NativeAudio,
     File,
